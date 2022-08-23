@@ -13,14 +13,12 @@ body {
     height: 100vh;
 }
 .musicContainer {
-    // border: 1px solid black;
     width: 400px;
     height: 150px;
     display: flex;
     background-color: $bcg-color;
     border-radius: 10px;
     .plak {
-        // border: 1px solid red;
         width: 40%;
         height: 100%;
         display: flex;
@@ -28,7 +26,6 @@ body {
         align-items: center;
         .cover {
             border-radius: 50%;
-            // border: 1px solid red;
             width: 100px;
             height: 100px;
             background-image: url("https://imgyukle.com/f/2022/08/21/nyAJFN.jpg");
@@ -36,8 +33,6 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
-            // transition: 100ms linear;
-
             #empty {
                 border-radius: 50%;
                 background-color: $bcg-color;
@@ -87,10 +82,6 @@ body {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-
-                // #pauseButton{
-                //     transition: 0.2s;
-                // }
             }
         }
     }
