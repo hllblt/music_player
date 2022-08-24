@@ -6,9 +6,6 @@ const prevSongButton = document.getElementById("prevSongButton");
 const stopButton = document.getElementById("stopButton");
 const songTitle = document.getElementById("songTitle");
 
-const happy = document.getElementById("happy");
-console.log(happy);
-
 const musicInfos = [
     {
         img: "https://imgyukle.com/f/2022/08/21/nyAJFN.jpg",
@@ -56,8 +53,8 @@ playButton.addEventListener("click", () => {
     playOrPause();
 });
 
-stopButton.addEventListener("click",()=>{
-    if(isPlaying){
+stopButton.addEventListener("click", () => {
+    if (isPlaying) {
         clearInterval(myInterval);
         intervalCounter = 0;
         isPlaying = false;
@@ -66,7 +63,7 @@ stopButton.addEventListener("click",()=>{
     document.getElementById(musicInfos[songNumber].url).pause();
     document.getElementById(musicInfos[songNumber].url).currentTime = 0;
     playButton.innerHTML = '<i class="fa-solid fa-play"></i>';
-})
+});
 
 // in this part, we assigned next and prev buttons' functions. when we press
 // buttons, song, song name and album cover will be changed.
@@ -139,6 +136,7 @@ function playOrPause() {
         clearInterval(myInterval);
         playButton.innerHTML = '<i class="fa-solid fa-play"></i>';
         document.getElementById(musicInfos[songNumber].url).pause();
+        document.getElementById(musicInfos[songNumber].url).volume;
         isPlaying = !isPlaying;
     } else {
         myInterval = setInterval(() => {
@@ -150,17 +148,41 @@ function playOrPause() {
         isPlaying = !isPlaying;
         document.getElementById(musicInfos[songNumber].url).play();
     }
+    volumeSetter();
 }
 
-// stop butonu koyulacak.
-    // button koyuldu.
-    // 
+const sound = document.getElementById("sound");
+const muteButton = document.getElementById("muteButton");
+let isMuted = false;
+let soundValue = 0;
+
+muteButton.addEventListener("click", () => {
+    if (!isMuted) {
+        muteButton.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+        soundValue = sound.value;
+        sound.value = "0";
+        isMuted = !isMuted;
+    } else {
+        muteButton.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+        sound.value = soundValue;
+        isMuted = !isMuted;
+    }
+    volumeSetter();
+});
+
+sound.addEventListener("change", () => {
+    volumeSetter();
+});
+sound.addEventListener("input", () => {
+    volumeSetter();
+});
+
+function volumeSetter() {
+    document.getElementById(musicInfos[songNumber].url).volume = `${
+        sound.value * 0.1
+    }`;
+}
 
 // şarkının ilerleyişi gösteren bar koyulacak.
 
 // ses seviyesi ve mute tuşu koyulacak.
-
-
-
-
-

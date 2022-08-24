@@ -50,7 +50,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 .musicContainer .controlPanel #playButton,
 .musicContainer .controlPanel #pauseButton,
@@ -60,14 +60,17 @@ body {
   font-size: 40px;
 }
 .musicContainer .controlPanel .display {
-  height: 30%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.musicContainer .controlPanel .progressBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .musicContainer .controlPanel .controlButtons {
-  height: 50%;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -89,4 +92,27 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.musicContainer .controlPanel .soundBar {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 20px;
+}
+.musicContainer .controlPanel .soundBar #sound {
+  width: 100px;
+  margin-right: 10px;
+}
+.musicContainer .controlPanel .soundBar #muteButton {
+  border: none;
+  color: white;
+  background-color: rgb(84, 83, 83);
+  padding: 4px 0;
+  width: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s linear;
+}
+.musicContainer .controlPanel .soundBar #muteButton:hover {
+  background-color: black;
 }/*# sourceMappingURL=style.css.map */
