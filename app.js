@@ -179,7 +179,7 @@ sound.addEventListener("input", () => {
 
 function volumeSetter() {
     document.getElementById(musicInfos[songNumber].url).volume = `${
-        sound.value * 0.1
+        sound.value * 0.02
     }`;
 }
 
