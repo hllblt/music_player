@@ -3,8 +3,8 @@ const pauseButton = document.getElementById("pauseButton");
 const cover = document.getElementsByClassName("cover")[0];
 const nextSongButton = document.getElementById("nextSongButton");
 const prevSongButton = document.getElementById("prevSongButton");
+const stopButton = document.getElementById("stopButton");
 const songTitle = document.getElementById("songTitle");
-// const display = document.getElementsByClassName("display")[0];
 
 const happy = document.getElementById("happy");
 console.log(happy);
@@ -53,21 +53,20 @@ let songNumber = 0;
 let isFirstPlay = true;
 
 playButton.addEventListener("click", () => {
-    // if (isPlaying) {
-    //     clearInterval(myInterval);
-    //     playButton.innerHTML = '<i class="fa-solid fa-play"></i>';
-    //     isPlaying = !isPlaying;
-    // } else {
-    //     myInterval = setInterval(() => {
-    //         cover.style.transform =
-    //             "rotate(" + `${intervalCounter * 0.2}` + "deg)";
-    //         intervalCounter += 1;
-    //     }, 10);
-    //     playButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
-    //     isPlaying = !isPlaying;
-    // }
     playOrPause();
 });
+
+stopButton.addEventListener("click",()=>{
+    if(isPlaying){
+        clearInterval(myInterval);
+        intervalCounter = 0;
+        isPlaying = false;
+    }
+    cover.style.transform = "rotate(0deg)";
+    document.getElementById(musicInfos[songNumber].url).pause();
+    document.getElementById(musicInfos[songNumber].url).currentTime = 0;
+    playButton.innerHTML = '<i class="fa-solid fa-play"></i>';
+})
 
 // in this part, we assigned next and prev buttons' functions. when we press
 // buttons, song, song name and album cover will be changed.
@@ -153,8 +152,15 @@ function playOrPause() {
     }
 }
 
-// HATIRLATMA
-// play ya da pause tuşuna basıldığında çalışacak bir fonksiyon yazılacak.
-// bu fonksiyon aynı zamanda next ya da prev tuşuna basıldığında da
-// çalışacak. next ya da prev tuşuna basıldığında play tuşuna da basılmış
-// gibi algılayacak.
+// stop butonu koyulacak.
+    // button koyuldu.
+    // 
+
+// şarkının ilerleyişi gösteren bar koyulacak.
+
+// ses seviyesi ve mute tuşu koyulacak.
+
+
+
+
+
