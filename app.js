@@ -1,4 +1,5 @@
-document.getElementsByTagName("body")[0].style.height = `${window.innerHeight}`;
+const body = document.getElementsByTagName("body")[0];
+body.style.height = `${window.innerHeight}`;
 
 const playButton = document.getElementById("playButton");
 const pauseButton = document.getElementById("pauseButton");
