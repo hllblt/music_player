@@ -1,3 +1,5 @@
+window.innerHeight;
+
 const playButton = document.getElementById("playButton");
 const pauseButton = document.getElementById("pauseButton");
 const cover = document.getElementsByClassName("cover")[0];
@@ -6,8 +8,6 @@ const prevSongButton = document.getElementById("prevSongButton");
 const stopButton = document.getElementById("stopButton");
 const songTitle = document.getElementById("songTitle");
 const progress = document.getElementById("progress");
-
-
 
 // MUSIC DATABASE
 const musicInfos = [
@@ -48,13 +48,13 @@ const musicInfos = [
     },
 ];
 
-let songNumber = Math.floor(Math.random()*6);
-progress.max = Math.floor(document.getElementById(musicInfos[songNumber].url).duration);
+let songNumber = Math.floor(Math.random() * 6);
+progress.max = Math.floor(
+    document.getElementById(musicInfos[songNumber].url).duration
+);
 progress.value = 0;
 cover.style.backgroundImage = "url(" + `${musicInfos[songNumber].img}` + ")";
 songTitle.innerText = musicInfos[songNumber].songName;
-
-
 
 let isPlaying = false;
 let intervalCounter = 1;
@@ -97,7 +97,9 @@ nextSongButton.addEventListener("click", () => {
     intervalCounter = 0;
     // (şimdilik comment yaptım)alttaki satırda, şarkının uzunluğunu progressbar'a atıyorum. ancak durationda her dakika için 1 saniye eklendiği için(sebebini bilmiyorum, araştıracağım), her dakika için 1 saniye çıkardım. +1 yapmamın sebebi diğer şarkıya 1 saniye geç giriş yapması için.
     // progress.max = `${Math.floor(document.getElementById(musicInfos[songNumber].url).duration)-(Math.floor(document.getElementById(musicInfos[songNumber].url).duration)/60)+1}`;
-    progress.max = `${Math.floor(document.getElementById(musicInfos[songNumber].url).duration)}`;
+    progress.max = `${Math.floor(
+        document.getElementById(musicInfos[songNumber].url).duration
+    )}`;
     songPlayer(songNumber);
     if (isPlaying) {
         clearInterval(myInterval);
@@ -164,9 +166,15 @@ function playOrPause() {
             cover.style.transform =
                 "rotate(" + `${intervalCounter * 0.2}` + "deg)";
             intervalCounter += 1;
-            progress.value = Math.floor(document.getElementById(musicInfos[songNumber].url).currentTime);
-            if(document.getElementById(musicInfos[songNumber].url).currentTime === document.getElementById(musicInfos[songNumber].url).duration){
-                nextSongButton.click()
+            progress.value = Math.floor(
+                document.getElementById(musicInfos[songNumber].url).currentTime
+            );
+            if (
+                document.getElementById(musicInfos[songNumber].url)
+                    .currentTime ===
+                document.getElementById(musicInfos[songNumber].url).duration
+            ) {
+                nextSongButton.click();
             }
         }, 10);
         playButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
@@ -206,16 +214,16 @@ function volumeSetter() {
     document.getElementById(musicInfos[songNumber].url).volume = `${
         sound.value * 0.02
     }`;
-    if(sound.value === "0"){
+    if (sound.value === "0") {
         muteButton.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
-    }
-    else{
+    } else {
         muteButton.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
     }
 }
 
-progress.addEventListener("change",()=>{
-    document.getElementById(musicInfos[songNumber].url).currentTime = progress.value;
-})
+progress.addEventListener("change", () => {
+    document.getElementById(musicInfos[songNumber].url).currentTime =
+        progress.value;
+});
 
-volumeSetter()
+volumeSetter();
