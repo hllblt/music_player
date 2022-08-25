@@ -8,16 +8,29 @@
 }
 
 // -webkit-tap-highlight-color: transparent;
-// -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+// -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 
 $bcg-color: rgb(229, 230, 230);
 body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    // height: 100vh;
     background-color: rgb(84, 83, 83);
 }
+//////////////////
+
+body {
+    min-height: 100vh;
+    min-height: fill-available;
+    min-height: -webkit-fill-available;
+}
+html {
+    height: fill-available;
+    height: -webkit-fill-available;
+}
+
+//////////////////
 .musicContainer {
     width: 400px;
     height: 150px;
@@ -58,7 +71,7 @@ body {
         #pauseButton,
         #nextSongButton,
         #prevSongButton,
-        #stopButton{
+        #stopButton {
             font-size: 40px;
         }
         .display {
@@ -68,9 +81,10 @@ body {
             justify-content: center;
             align-items: center;
         }
-        .progressBar{
+        .progressBar {
             display: flex;
-            justify-content: center;align-items: center;
+            justify-content: center;
+            align-items: center;
         }
         .controlButtons {
             // height: 50%;
@@ -97,18 +111,18 @@ body {
                 align-items: center;
             }
         }
-        .soundBar{
+        .soundBar {
             display: flex;
             justify-content: end;
             align-items: center;
             padding-right: 20px;
             // flex-direction: column;
             // width: 100px;
-            #sound{
+            #sound {
                 width: 100px;
                 margin-right: 10px;
             }
-            #muteButton{
+            #muteButton {
                 border: none;
                 color: white;
                 background-color: rgb(84, 83, 83);
@@ -118,7 +132,7 @@ body {
                 cursor: pointer;
                 transition: 0.2s linear;
             }
-            #muteButton:hover{
+            #muteButton:hover {
                 background-color: black;
             }
         }
