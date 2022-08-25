@@ -206,8 +206,16 @@ function volumeSetter() {
     document.getElementById(musicInfos[songNumber].url).volume = `${
         sound.value * 0.02
     }`;
+    if(sound.value === "0"){
+        muteButton.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+    }
+    else{
+        muteButton.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+    }
 }
 
 progress.addEventListener("change",()=>{
     document.getElementById(musicInfos[songNumber].url).currentTime = progress.value;
 })
+
+volumeSetter()
