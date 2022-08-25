@@ -5,7 +5,11 @@ const nextSongButton = document.getElementById("nextSongButton");
 const prevSongButton = document.getElementById("prevSongButton");
 const stopButton = document.getElementById("stopButton");
 const songTitle = document.getElementById("songTitle");
+const progress = document.getElementById("progress");
 
+
+
+// MUSIC DATABASE
 const musicInfos = [
     {
         img: "https://imgyukle.com/f/2022/08/21/nyAJFN.jpg",
@@ -44,15 +48,24 @@ const musicInfos = [
     },
 ];
 
+let songNumber = Math.floor(Math.random()*6);
+progress.max = Math.floor(document.getElementById(musicInfos[songNumber].url).duration);
+progress.value = 0;
+cover.style.backgroundImage = "url(" + `${musicInfos[songNumber].img}` + ")";
+songTitle.innerText = musicInfos[songNumber].songName;
+
+
+
 let isPlaying = false;
 let intervalCounter = 1;
-let songNumber = 0;
 let isFirstPlay = true;
 
+// PLAY AND PAUSE BUTTON
 playButton.addEventListener("click", () => {
     playOrPause();
 });
 
+// STOP BUTTON
 stopButton.addEventListener("click", () => {
     if (isPlaying) {
         clearInterval(myInterval);
@@ -63,10 +76,13 @@ stopButton.addEventListener("click", () => {
     document.getElementById(musicInfos[songNumber].url).pause();
     document.getElementById(musicInfos[songNumber].url).currentTime = 0;
     playButton.innerHTML = '<i class="fa-solid fa-play"></i>';
+    progress.value = "0";
 });
 
 // in this part, we assigned next and prev buttons' functions. when we press
 // buttons, song, song name and album cover will be changed.
+
+// NEXT BUTTON
 nextSongButton.addEventListener("click", () => {
     // console.log("next");
     if (songNumber === 6) {
@@ -79,6 +95,9 @@ nextSongButton.addEventListener("click", () => {
         "url(" + `${musicInfos[songNumber].img}` + ")";
     cover.style.transform = "rotate(0deg)";
     intervalCounter = 0;
+    // (şimdilik comment yaptım)alttaki satırda, şarkının uzunluğunu progressbar'a atıyorum. ancak durationda her dakika için 1 saniye eklendiği için(sebebini bilmiyorum, araştıracağım), her dakika için 1 saniye çıkardım. +1 yapmamın sebebi diğer şarkıya 1 saniye geç giriş yapması için.
+    // progress.max = `${Math.floor(document.getElementById(musicInfos[songNumber].url).duration)-(Math.floor(document.getElementById(musicInfos[songNumber].url).duration)/60)+1}`;
+    progress.max = `${Math.floor(document.getElementById(musicInfos[songNumber].url).duration)}`;
     songPlayer(songNumber);
     if (isPlaying) {
         clearInterval(myInterval);
@@ -87,6 +106,7 @@ nextSongButton.addEventListener("click", () => {
     playOrPause();
 });
 
+// PREV BUTTON
 prevSongButton.addEventListener("click", () => {
     if (songNumber === 0) {
         songNumber = 6;
@@ -106,6 +126,7 @@ prevSongButton.addEventListener("click", () => {
     playOrPause();
 });
 
+// SONG PLAYER FUNCTION
 function songPlayer(songNum) {
     // bu fonksiyon,next veya prev tuşlarına basıldığında çalan şarkıyı
     // durdurup, yeni şarkıyı çalmak için yazıldı.
@@ -143,6 +164,10 @@ function playOrPause() {
             cover.style.transform =
                 "rotate(" + `${intervalCounter * 0.2}` + "deg)";
             intervalCounter += 1;
+            progress.value = Math.floor(document.getElementById(musicInfos[songNumber].url).currentTime);
+            if(document.getElementById(musicInfos[songNumber].url).currentTime === document.getElementById(musicInfos[songNumber].url).duration){
+                nextSongButton.click()
+            }
         }, 10);
         playButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
         isPlaying = !isPlaying;
@@ -183,6 +208,6 @@ function volumeSetter() {
     }`;
 }
 
-// şarkının ilerleyişi gösteren bar koyulacak.
-
-// ses seviyesi ve mute tuşu koyulacak.
+progress.addEventListener("change",()=>{
+    document.getElementById(musicInfos[songNumber].url).currentTime = progress.value;
+})
